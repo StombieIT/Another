@@ -27,4 +27,4 @@ def calc(exp: str):
 		exp = [calc(sub_exp) for sub_exp in exp.split('^', 1)]
 		result = exp[0] ** exp[1]
 		return result
-	return int(exp)
+	return int(exp) if exp.isdigit() else 0
